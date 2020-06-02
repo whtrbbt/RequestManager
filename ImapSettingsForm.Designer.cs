@@ -164,6 +164,7 @@
             this.MinimizeBox = false;
             this.Name = "ImapSettingsForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки IMAP-сервера";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

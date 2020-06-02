@@ -149,7 +149,7 @@
             this.iMAPServerSettingsToolStripMenuItem.Name = "iMAPServerSettingsToolStripMenuItem";
             this.iMAPServerSettingsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.iMAPServerSettingsToolStripMenuItem.Text = "Параметры IMAP-сервера...";
-            this.iMAPServerSettingsToolStripMenuItem.Click += new System.EventHandler(this.параметрыIMAPсервераToolStripMenuItem_Click);
+            this.iMAPServerSettingsToolStripMenuItem.Click += new System.EventHandler(this.IMAPServerSettingsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -163,6 +163,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Менеджер запросов";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

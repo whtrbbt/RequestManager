@@ -21,6 +21,13 @@ namespace RequestManager
             InitializeComponent();
             inDirTextBox.Text = Properties.Settings.Default.REQ_IN_DIR;
             outDirTextBox.Text = Properties.Settings.Default.REQ_OUT_DIR;
+
+            if (!(CheckIMAPSettings()))
+            {
+                
+                ImapSettingsForm imapSettings = new ImapSettingsForm();
+                imapSettings.ShowDialog();
+            }
         }
 
         private void inDirSelectButton_Click(object sender, EventArgs e)
@@ -51,10 +58,25 @@ namespace RequestManager
             }
         }
 
-        private void параметрыIMAPсервераToolStripMenuItem_Click(object sender, EventArgs e)
+        private void IMAPServerSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImapSettingsForm imapSettings = new ImapSettingsForm();
-            imapSettings.Show();
+            ImapSettingsForm imapSettings = new ImapSettingsForm();                     
+            imapSettings.ShowDialog();
+            
         }
+
+        private static bool CheckIMAPSettings ()
+        {
+            if ((Properties.Settings.Default.IMAP_SERVER.Length == 0)||
+                (Properties.Settings.Default.LOGIN.Length == 0)||
+                (Properties.Settings.Default.PASSWORD.Length == 0)||
+                (Properties.Settings.Default.FOLDER.Length == 0))
+            {
+                return false;
+            }
+            else
+            return true;
+        }
+
     }
 }
