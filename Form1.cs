@@ -78,5 +78,10 @@ namespace RequestManager
             return true;
         }
 
+        private void OpenNewRequestsFormButton_Click(object sender, EventArgs e)
+        {
+            NewRequestsForm requestsForm = new NewRequestsForm();
+            requestsForm.ShowDialog();
+        }
     }
 }
