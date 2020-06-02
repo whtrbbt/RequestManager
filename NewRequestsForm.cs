@@ -1,16 +1,11 @@
-﻿using System;
-using MailKit;
+﻿using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using MailKit.Security;
-using MimeKit;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RequestManager
@@ -43,6 +38,34 @@ namespace RequestManager
                 IMAPServerAuthStatusLabel.ForeColor = Color.Red;
             }
 
+            try
+            {
+                var folder = imapClient.GetFolder(Properties.Settings.Default.FOLDER);
+                if (folder.Exists)
+                {
+                    IMAPFolderStatusLabel.Text = "OK";
+                    IMAPFolderStatusLabel.ForeColor = Color.Green;
+                    IList<UniqueId> messagesUids = GetNewRequests(folder);
+                    if (messagesUids.Count() >= 0)
+                        NewRequestsCountLabel.Text = messagesUids.Count().ToString();
+                    else
+                        NewRequestsCountLabel.Text = "Н/Д";
+                }
+                else
+                {
+                    IMAPFolderStatusLabel.Text = "X";
+                    IMAPFolderStatusLabel.ForeColor = Color.Red;
+                    NewRequestsCountLabel.Text = "Н/Д";
+                }
+            }
+            catch (Exception e)
+            {
+                IMAPFolderStatusLabel.Text = "X";
+                IMAPFolderStatusLabel.ForeColor = Color.Red;
+                NewRequestsCountLabel.Text = "Н/Д";
+            }
+
+           
 
         }
 
@@ -65,6 +88,29 @@ namespace RequestManager
            
 
 
+        }
+
+        private IList<UniqueId> GetNewRequests (IMailFolder folder)
+        {
+            IList <UniqueId> uids;
+            SearchQuery query;
+            query = SearchQuery.NotSeen.And(SearchQuery.SubjectContains("Портал Росреестра: заявление выполн"));
+            try
+            {
+                folder.Open(FolderAccess.ReadOnly);
+                uids = folder.Search(query);
+          
+            }
+            catch (Exception e)
+            {
+                uids = null;
+            }
+            return uids;
+        }
+
+        private void NewRequestsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
         }
     }
 
