@@ -83,5 +83,11 @@ namespace RequestManager
             NewRequestsForm requestsForm = new NewRequestsForm();
             requestsForm.ShowDialog();
         }
+
+        private void DBServerSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MSSQLServerSettingsForm serverSettingsForm = new MSSQLServerSettingsForm();
+            serverSettingsForm.ShowDialog();
+        }
     }
 }

@@ -36,10 +36,11 @@
             this.outDirSelectButton = new System.Windows.Forms.Button();
             this.inDirSelectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.OpenNewRequestsFormButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenNewRequestsFormButton = new System.Windows.Forms.Button();
+            this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -145,6 +146,16 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(382, 73);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
+            // OpenNewRequestsFormButton
+            // 
+            this.OpenNewRequestsFormButton.Location = new System.Drawing.Point(3, 3);
+            this.OpenNewRequestsFormButton.Name = "OpenNewRequestsFormButton";
+            this.OpenNewRequestsFormButton.Size = new System.Drawing.Size(180, 36);
+            this.OpenNewRequestsFormButton.TabIndex = 0;
+            this.OpenNewRequestsFormButton.Text = "Получить данные о готовых заявках";
+            this.OpenNewRequestsFormButton.UseVisualStyleBackColor = true;
+            this.OpenNewRequestsFormButton.Click += new System.EventHandler(this.OpenNewRequestsFormButton_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -158,7 +169,8 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iMAPServerSettingsToolStripMenuItem});
+            this.iMAPServerSettingsToolStripMenuItem,
+            this.DBServerSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.settingsToolStripMenuItem.Text = "Настройки";
@@ -166,19 +178,16 @@
             // iMAPServerSettingsToolStripMenuItem
             // 
             this.iMAPServerSettingsToolStripMenuItem.Name = "iMAPServerSettingsToolStripMenuItem";
-            this.iMAPServerSettingsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.iMAPServerSettingsToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
             this.iMAPServerSettingsToolStripMenuItem.Text = "Параметры IMAP-сервера...";
             this.iMAPServerSettingsToolStripMenuItem.Click += new System.EventHandler(this.IMAPServerSettingsToolStripMenuItem_Click);
             // 
-            // OpenNewRequestsFormButton
+            // DBServerSettingsToolStripMenuItem
             // 
-            this.OpenNewRequestsFormButton.Location = new System.Drawing.Point(3, 3);
-            this.OpenNewRequestsFormButton.Name = "OpenNewRequestsFormButton";
-            this.OpenNewRequestsFormButton.Size = new System.Drawing.Size(180, 36);
-            this.OpenNewRequestsFormButton.TabIndex = 0;
-            this.OpenNewRequestsFormButton.Text = "Получить данные о готовых заявках";
-            this.OpenNewRequestsFormButton.UseVisualStyleBackColor = true;
-            this.OpenNewRequestsFormButton.Click += new System.EventHandler(this.OpenNewRequestsFormButton_Click);
+            this.DBServerSettingsToolStripMenuItem.Name = "DBServerSettingsToolStripMenuItem";
+            this.DBServerSettingsToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.DBServerSettingsToolStripMenuItem.Text = "Параметры сервера базы данных...";
+            this.DBServerSettingsToolStripMenuItem.Click += new System.EventHandler(this.DBServerSettingsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -218,6 +227,7 @@
         private System.Windows.Forms.ToolStripMenuItem iMAPServerSettingsToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button OpenNewRequestsFormButton;
+        private System.Windows.Forms.ToolStripMenuItem DBServerSettingsToolStripMenuItem;
     }
 }
 

@@ -94,5 +94,50 @@ namespace RequestManager.Properties {
                 this["FOLDER"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MSSQL_SERVER {
+            get {
+                return ((string)(this["MSSQL_SERVER"]));
+            }
+            set {
+                this["MSSQL_SERVER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MSSQL_UID {
+            get {
+                return ((string)(this["MSSQL_UID"]));
+            }
+            set {
+                this["MSSQL_UID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MSSQL_PASSWORD {
+            get {
+                return ((string)(this["MSSQL_PASSWORD"]));
+            }
+            set {
+                this["MSSQL_PASSWORD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MSSQL_RESPONSE_TABLE {
+            get {
+                return ((string)(this["MSSQL_RESPONSE_TABLE"]));
+            }
+        }
     }
 }
