@@ -133,10 +133,19 @@ namespace RequestManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Responses")]
         public string MSSQL_RESPONSE_TABLE {
             get {
                 return ((string)(this["MSSQL_RESPONSE_TABLE"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RQSTS_MNGR")]
+        public string MSSQL_DBNAME {
+            get {
+                return ((string)(this["MSSQL_DBNAME"]));
             }
         }
     }

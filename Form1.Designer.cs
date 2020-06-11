@@ -41,6 +41,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -170,7 +171,8 @@
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.iMAPServerSettingsToolStripMenuItem,
-            this.DBServerSettingsToolStripMenuItem});
+            this.DBServerSettingsToolStripMenuItem,
+            this.UserManamentToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.settingsToolStripMenuItem.Text = "Настройки";
@@ -188,6 +190,13 @@
             this.DBServerSettingsToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
             this.DBServerSettingsToolStripMenuItem.Text = "Параметры сервера базы данных...";
             this.DBServerSettingsToolStripMenuItem.Click += new System.EventHandler(this.DBServerSettingsToolStripMenuItem_Click);
+            // 
+            // UserManamentToolStripMenuItem
+            // 
+            this.UserManamentToolStripMenuItem.Name = "UserManamentToolStripMenuItem";
+            this.UserManamentToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
+            this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -228,6 +237,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button OpenNewRequestsFormButton;
         private System.Windows.Forms.ToolStripMenuItem DBServerSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UserManamentToolStripMenuItem;
     }
 }
 

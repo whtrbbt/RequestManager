@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSVUtility;
+using System.Data.SqlClient;
 
 namespace RequestManager
 {
@@ -19,7 +20,7 @@ namespace RequestManager
         ImapClient imapClient;
         IMailFolder workFolder;
         SearchQuery searchQuery;
-
+        public DataTable requestsResponse;
 
         public NewRequestsForm()
         {
@@ -89,7 +90,7 @@ namespace RequestManager
 
         private void NewRequestsForm_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private ImapClient CreateIMAPConnection()
@@ -186,6 +187,13 @@ namespace RequestManager
             column.DefaultValue = false;
             requestResult.Columns.Add(column);
 
+            //6. ResponseDate (Дата сообщения о готовности запроса ЕГРН)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.DateTime");
+            column.ColumnName = "ResponseDate";
+            column.AllowDBNull = false;
+            //column.DefaultValue = false;
+            requestResult.Columns.Add(column);
             #endregion
 
             MimeMessage message;
@@ -194,7 +202,7 @@ namespace RequestManager
             string reqNum;
             string messageText;
             Match m;
-            //int limiter = 50; //Ограничитель для отладки
+            int limiter = 50; //Ограничитель для отладки
 
             folder.Open(FolderAccess.ReadOnly);
             var uids = folder.Search(query);
@@ -203,6 +211,7 @@ namespace RequestManager
             {
                 //limiter--;
                 //if (limiter <= 0) break;
+                
                 link = "";
                 code = "";
                 reqNum = "";
@@ -219,11 +228,101 @@ namespace RequestManager
                 dataRow["DocLink"] = "http://" + @link;
                 dataRow["AuthCode"] = code;
                 dataRow["HaveSeen"] = true;
+                dataRow["ResponseDate"] = message.Date.DateTime;
                 requestResult.Rows.Add(dataRow);
                 DownloadRequestsProgressBar.Invoke(new Action(() => DownloadRequestsProgressBar.Value++));
 
             }
             return requestResult;
+        }
+
+        private void LoadResponsesToDB (DataTable inResponses)
+        {
+            DataTable responsesToDB = new DataTable();
+            DataColumn column;
+            DataRow dataRow;
+
+            #region Задаем структуру таблицы responsesToDB
+            
+            //1. RequestNum (Номер запросов)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "RequestNum";
+            column.AllowDBNull = false;
+            responsesToDB.Columns.Add(column);
+
+            //2. DocLink (Ссылка на документы по запросу выписки)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DocLink";
+            column.AllowDBNull = true;
+            column.DefaultValue = "";
+            responsesToDB.Columns.Add(column);
+
+            //3. AuthCode (Код авторизации для скачивания документов)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "AuthCode";
+            column.AllowDBNull = true;
+            column.DefaultValue = "";
+            responsesToDB.Columns.Add(column);
+
+            //4. ResponseDate (дата получения ответа на запрос выписки)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.DateTime");
+            column.ColumnName = "ResponseDate";
+            column.AllowDBNull = true;
+            responsesToDB.Columns.Add(column);
+
+            //5. DownloadDate (дата загрузки ответа в систему управления выписками)
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.DateTime");
+            column.ColumnName = "DownloadDate";
+            column.AllowDBNull = true;
+            responsesToDB.Columns.Add(column);
+
+            try
+            {
+                foreach (DataRow tempRow in inResponses.Rows)
+                {
+                    dataRow = responsesToDB.NewRow();
+                    dataRow["RequestNum"] = tempRow["RequestNum"];
+                    dataRow["DocLink"] = tempRow["DocLink"];
+                    dataRow["AuthCode"] = tempRow["AuthCode"];
+                    dataRow["ResponseDate"] = tempRow["ResponseDate"];
+                    dataRow["DownloadDate"] = System.DateTime.Now;
+                    responsesToDB.Rows.Add(dataRow);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Не удалось передать данные в буфер", "ОШИБКА!");
+            }
+            finally
+            {
+
+                try
+                {
+                    SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder();
+                    stringBuilder.DataSource = Properties.Settings.Default.MSSQL_SERVER;
+                    stringBuilder.InitialCatalog = Properties.Settings.Default.MSSQL_DBNAME;
+                    stringBuilder.UserID = Properties.Settings.Default.MSSQL_UID;
+                    stringBuilder.Password = Properties.Settings.Default.MSSQL_PASSWORD;
+                    stringBuilder.IntegratedSecurity = true;
+
+                    CSVUtility.CSVUtility.InsertDataIntoSQLServerUsingSQLBulkCopy(responsesToDB, Properties.Settings.Default.MSSQL_RESPONSE_TABLE, stringBuilder.ConnectionString);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Не удалось загрузить данные в базу данных: "+e.ToString(), "ОШИБКА!");                    
+                }
+                finally
+                {
+                    MessageBox.Show("Загрузка данных завершена, загружено: " + responsesToDB.Rows.Count + " записей.", "Готово!");
+                }
+            }
+           
+            #endregion
         }
 
         private async void DownloadRequestsDataButton_Click(object sender, EventArgs e)
@@ -232,14 +331,16 @@ namespace RequestManager
             DownloadRequestsProgressBar.Visible = true;
             DownloadRequestsProgressBar.Minimum = 0;
             DownloadRequestsProgressBar.Maximum = CountMessagesInFolder(workFolder, searchQuery);
-            DownloadRequestsProgressBar.Value = 0;
+            DownloadRequestsProgressBar.Value = 0;            
 
             DataTable response = null;
             try
             {
                 await Task.Run(() => 
-                { response = RequestsDataParser(workFolder, searchQuery);
-                  CSVUtility.CSVUtility.ToCSV(response, Properties.Settings.Default.REQ_OUT_DIR + "out.csv");                
+                { 
+                    response = RequestsDataParser(workFolder, searchQuery);
+                    LoadResponsesToDB(response);
+                    //CSVUtility.CSVUtility.ToCSV(response, Properties.Settings.Default.REQ_OUT_DIR + "\\out.csv");                
                 } );
             }
             catch (Exception)
@@ -248,9 +349,10 @@ namespace RequestManager
             }
             finally
             {
-                MessageBox.Show("Загруженно " + response.Rows.Count + " готовых заявок!", "Готово!");
+                MessageBox.Show("Загруженно "+ response.Rows.Count + " готовых заявок!", "Готово!");
             }
 
+            this.requestsResponse = response;
             DownloadRequestsDataButton.Enabled = true;
 
         }

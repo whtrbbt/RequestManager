@@ -31,13 +31,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.iMAPServerStatusLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.IMAPServerAuthStatusLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.IMAPFolderStatusLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.NewRequestsCountLabel = new System.Windows.Forms.Label();
-            this.IMAPFolderStatusLabel = new System.Windows.Forms.Label();
-            this.IMAPServerAuthStatusLabel = new System.Windows.Forms.Label();
-            this.iMAPServerStatusLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.DownloadRequestsDataButton = new System.Windows.Forms.Button();
             this.СancelButton = new System.Windows.Forms.Button();
@@ -58,6 +58,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(278, 106);
@@ -99,6 +100,17 @@
             this.label1.Text = "Статус подключения к IMAP-серверу:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // iMAPServerStatusLabel
+            // 
+            this.iMAPServerStatusLabel.AutoSize = true;
+            this.iMAPServerStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iMAPServerStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.iMAPServerStatusLabel.Location = new System.Drawing.Point(207, 0);
+            this.iMAPServerStatusLabel.Name = "iMAPServerStatusLabel";
+            this.iMAPServerStatusLabel.Size = new System.Drawing.Size(62, 20);
+            this.iMAPServerStatusLabel.TabIndex = 1;
+            this.iMAPServerStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -110,6 +122,18 @@
             this.label2.Text = "Статус авторизации IMAP-сервера:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // IMAPServerAuthStatusLabel
+            // 
+            this.IMAPServerAuthStatusLabel.AutoSize = true;
+            this.IMAPServerAuthStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IMAPServerAuthStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.IMAPServerAuthStatusLabel.Location = new System.Drawing.Point(207, 20);
+            this.IMAPServerAuthStatusLabel.Name = "IMAPServerAuthStatusLabel";
+            this.IMAPServerAuthStatusLabel.Size = new System.Drawing.Size(62, 20);
+            this.IMAPServerAuthStatusLabel.TabIndex = 3;
+            this.IMAPServerAuthStatusLabel.Text = "label3";
+            this.IMAPServerAuthStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -120,6 +144,18 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Рабочая папка IMAP-сервера:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // IMAPFolderStatusLabel
+            // 
+            this.IMAPFolderStatusLabel.AutoSize = true;
+            this.IMAPFolderStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IMAPFolderStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.IMAPFolderStatusLabel.Location = new System.Drawing.Point(207, 40);
+            this.IMAPFolderStatusLabel.Name = "IMAPFolderStatusLabel";
+            this.IMAPFolderStatusLabel.Size = new System.Drawing.Size(62, 20);
+            this.IMAPFolderStatusLabel.TabIndex = 5;
+            this.IMAPFolderStatusLabel.Text = "label4";
+            this.IMAPFolderStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
@@ -143,41 +179,6 @@
             this.NewRequestsCountLabel.TabIndex = 7;
             this.NewRequestsCountLabel.Text = "label5";
             this.NewRequestsCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // IMAPFolderStatusLabel
-            // 
-            this.IMAPFolderStatusLabel.AutoSize = true;
-            this.IMAPFolderStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IMAPFolderStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.IMAPFolderStatusLabel.Location = new System.Drawing.Point(207, 40);
-            this.IMAPFolderStatusLabel.Name = "IMAPFolderStatusLabel";
-            this.IMAPFolderStatusLabel.Size = new System.Drawing.Size(62, 20);
-            this.IMAPFolderStatusLabel.TabIndex = 5;
-            this.IMAPFolderStatusLabel.Text = "label4";
-            this.IMAPFolderStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // IMAPServerAuthStatusLabel
-            // 
-            this.IMAPServerAuthStatusLabel.AutoSize = true;
-            this.IMAPServerAuthStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IMAPServerAuthStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.IMAPServerAuthStatusLabel.Location = new System.Drawing.Point(207, 20);
-            this.IMAPServerAuthStatusLabel.Name = "IMAPServerAuthStatusLabel";
-            this.IMAPServerAuthStatusLabel.Size = new System.Drawing.Size(62, 20);
-            this.IMAPServerAuthStatusLabel.TabIndex = 3;
-            this.IMAPServerAuthStatusLabel.Text = "label3";
-            this.IMAPServerAuthStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // iMAPServerStatusLabel
-            // 
-            this.iMAPServerStatusLabel.AutoSize = true;
-            this.iMAPServerStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iMAPServerStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.iMAPServerStatusLabel.Location = new System.Drawing.Point(207, 0);
-            this.iMAPServerStatusLabel.Name = "iMAPServerStatusLabel";
-            this.iMAPServerStatusLabel.Size = new System.Drawing.Size(62, 20);
-            this.iMAPServerStatusLabel.TabIndex = 1;
-            this.iMAPServerStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 

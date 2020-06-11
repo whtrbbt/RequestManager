@@ -89,5 +89,10 @@ namespace RequestManager
             MSSQLServerSettingsForm serverSettingsForm = new MSSQLServerSettingsForm();
             serverSettingsForm.ShowDialog();
         }
+
+        private void UserManamentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
