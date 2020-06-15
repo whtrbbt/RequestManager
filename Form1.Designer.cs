@@ -42,6 +42,7 @@
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoadRequestsButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -138,6 +139,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.6911F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.3089F));
             this.tableLayoutPanel2.Controls.Add(this.OpenNewRequestsFormButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.LoadRequestsButton, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 121);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -198,6 +200,17 @@
             this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
             this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
             // 
+            // LoadRequestsButton
+            // 
+            this.LoadRequestsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LoadRequestsButton.Location = new System.Drawing.Point(189, 3);
+            this.LoadRequestsButton.Name = "LoadRequestsButton";
+            this.LoadRequestsButton.Size = new System.Drawing.Size(190, 38);
+            this.LoadRequestsButton.TabIndex = 1;
+            this.LoadRequestsButton.Text = "Загрузить запросы в БД";
+            this.LoadRequestsButton.UseVisualStyleBackColor = true;
+            this.LoadRequestsButton.Click += new System.EventHandler(this.LoadRequestsButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +251,7 @@
         private System.Windows.Forms.Button OpenNewRequestsFormButton;
         private System.Windows.Forms.ToolStripMenuItem DBServerSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UserManamentToolStripMenuItem;
+        private System.Windows.Forms.Button LoadRequestsButton;
     }
 }
 

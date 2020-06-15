@@ -94,5 +94,11 @@ namespace RequestManager
         {
 
         }
+
+        private void LoadRequestsButton_Click(object sender, EventArgs e)
+        {
+            LoadRequestsToDB loadRequests = new LoadRequestsToDB();
+            loadRequests.ShowDialog();
+        }
     }
 }

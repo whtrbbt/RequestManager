@@ -281,6 +281,8 @@ namespace RequestManager
             column.AllowDBNull = true;
             responsesToDB.Columns.Add(column);
 
+            #endregion
+
             try
             {
                 foreach (DataRow tempRow in inResponses.Rows)
@@ -322,7 +324,7 @@ namespace RequestManager
                 }
             }
            
-            #endregion
+          
         }
 
         private async void DownloadRequestsDataButton_Click(object sender, EventArgs e)

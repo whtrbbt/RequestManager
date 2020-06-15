@@ -232,6 +232,23 @@ namespace CSVUtility
             }
         }
 
+        public static DataTable GetDataTableFromDB (string connectionString, string query, int timeOut = 100)
+        // Возвзращает результат запроса к БД в виде DataTable
+        {
+
+            DataTable dataTable = new DataTable();
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
+            {
+                dbConnection.Open();
+                SqlCommand cmd = new SqlCommand(query, dbConnection);
+                cmd.CommandTimeout = timeOut;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dataTable);
+                dbConnection.Close();
+                dataAdapter.Dispose();
+                return dataTable;
+            }
+        }
 
     }  
  

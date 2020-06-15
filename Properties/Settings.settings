@@ -35,5 +35,8 @@
     <Setting Name="MSSQL_DBNAME" Type="System.String" Scope="Application">
       <Value Profile="(Default)">RQSTS_MNGR</Value>
     </Setting>
+    <Setting Name="MSSQL_USERS_TABLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Users</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
