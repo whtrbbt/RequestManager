@@ -100,5 +100,11 @@ namespace RequestManager
             LoadRequestsToDB loadRequests = new LoadRequestsToDB();
             loadRequests.ShowDialog();
         }
+
+        private void GetFinishedRequestsButton_Click(object sender, EventArgs e)
+        {
+            GetFinishedRequestsForm getFinishedRequests = new GetFinishedRequestsForm();
+            getFinishedRequests.ShowDialog();
+        }
     }
 }

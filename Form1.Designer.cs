@@ -43,6 +43,7 @@
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GetFinishedRequestsButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -69,7 +70,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 197);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 211);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -140,13 +141,14 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.3089F));
             this.tableLayoutPanel2.Controls.Add(this.OpenNewRequestsFormButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.LoadRequestsButton, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.GetFinishedRequestsButton, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 121);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(382, 73);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(382, 87);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // OpenNewRequestsFormButton
@@ -216,11 +218,21 @@
             this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
             this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
             // 
+            // GetFinishedRequestsButton
+            // 
+            this.GetFinishedRequestsButton.Location = new System.Drawing.Point(189, 47);
+            this.GetFinishedRequestsButton.Name = "GetFinishedRequestsButton";
+            this.GetFinishedRequestsButton.Size = new System.Drawing.Size(190, 37);
+            this.GetFinishedRequestsButton.TabIndex = 2;
+            this.GetFinishedRequestsButton.Text = "Выгрузить готовые запросы";
+            this.GetFinishedRequestsButton.UseVisualStyleBackColor = true;
+            this.GetFinishedRequestsButton.Click += new System.EventHandler(this.GetFinishedRequestsButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 221);
+            this.ClientSize = new System.Drawing.Size(519, 235);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -257,6 +269,7 @@
         private System.Windows.Forms.ToolStripMenuItem DBServerSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UserManamentToolStripMenuItem;
         private System.Windows.Forms.Button LoadRequestsButton;
+        private System.Windows.Forms.Button GetFinishedRequestsButton;
     }
 }
 

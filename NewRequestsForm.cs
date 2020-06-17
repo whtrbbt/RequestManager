@@ -95,11 +95,14 @@ namespace RequestManager
 
         private ImapClient CreateIMAPConnection()
         {
+            string login = Properties.Settings.Default.LOGIN;
+            string passw = Properties.Settings.Default.PASSWORD;
+
            var client = new ImapClient();
            try
            {
                 client.Connect(Properties.Settings.Default.IMAP_SERVER, 993, SecureSocketOptions.SslOnConnect);
-                client.Authenticate(Properties.Settings.Default.LOGIN, Properties.Settings.Default.PASSWORD);
+                client.Authenticate(login, passw);
            }
            catch (Exception e)
            { }   
