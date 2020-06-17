@@ -298,7 +298,7 @@ namespace RequestManager
             }
             catch (Exception e)
             {
-                MessageBox.Show("Не удалось передать данные в буфер", "ОШИБКА!");
+                MessageBox.Show(e.Message, "ОШИБКА!");
             }
             finally
             {
@@ -316,7 +316,7 @@ namespace RequestManager
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Не удалось загрузить данные в базу данных: "+e.ToString(), "ОШИБКА!");                    
+                    MessageBox.Show("Не удалось загрузить данные в базу данных: "+e.Message, "ОШИБКА!");                    
                 }
                 finally
                 {

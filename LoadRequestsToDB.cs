@@ -60,14 +60,29 @@ namespace RequestManager
                 MessageBox.Show("Заполнены не все поля", "Внимание!");
                 return;
             }
+            try
+            {
+                LoadUserRequestsToDB (CSVUtility.CSVUtility.GetDataTableFromXLXS(requestsFilePath), RequestsUserSelectComboBox.SelectedIndex);
+            }
+            catch (Exception ex)
+            { }
+            
+        }
 
+        private void LoadUserRequestsToDB (DataTable inRequests, int UserID)
+        {
             DataTable requestFromFile;
             DataTable requestsTable = new DataTable();
             DataColumn column;
             DataRow dataRow;
 
+            SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder();
+            stringBuilder.DataSource = Properties.Settings.Default.MSSQL_SERVER;
+            stringBuilder.InitialCatalog = Properties.Settings.Default.MSSQL_DBNAME;
+            stringBuilder.UserID = Properties.Settings.Default.MSSQL_UID;
+            stringBuilder.Password = Properties.Settings.Default.MSSQL_PASSWORD;
+            stringBuilder.IntegratedSecurity = true;
 
-            /// Вывести загрузку в отдельный метод!!!
             #region Задаем структуру таблицы responsesToDB
 
             //1. CadNum (Кадастровый номер)
@@ -93,7 +108,7 @@ namespace RequestManager
 
             //4. UserID (Идентификатор пользователя)
             column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int16"); 
+            column.DataType = System.Type.GetType("System.Int16");
             column.ColumnName = "UserID";
             column.AllowDBNull = false;
             requestsTable.Columns.Add(column);
@@ -102,19 +117,28 @@ namespace RequestManager
 
             try
             {
-                requestFromFile = CSVUtility.CSVUtility.GetDataTableFromXLXS(requestsFilePath);
-                foreach (DataRow dr in requestFromFile.Rows)
+                
+                foreach (DataRow dr in inRequests.Rows)
                 {
                     dataRow = requestsTable.NewRow();
                     dataRow["CadNum"] = dr[0];
                     dataRow["ReqNum"] = dr[1];
                     dataRow["CreateDate"] = System.DateTime.Now;
-
-
+                    dataRow["UserID"] = UserID;
+                    requestsTable.Rows.Add(dataRow);
                 }
+                this.Enabled = false;
+                CSVUtility.CSVUtility.InsertDataIntoSQLServerUsingSQLBulkCopy(requestsTable,
+                    Properties.Settings.Default.MSSQL_REQUESTS, stringBuilder.ConnectionString);
             }
             catch (Exception ex)
-            { }
+            {
+                MessageBox.Show(ex.Message, "Ошибка!");
+                return;
+            }
+            
+            MessageBox.Show("Загрузка завершена, загруженно " + requestsTable.Rows.Count + "заявок", "Готово!");
+            this.Enabled = true;
         }
 
         private bool ValidateForm()

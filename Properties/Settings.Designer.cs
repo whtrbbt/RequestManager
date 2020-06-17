@@ -157,5 +157,14 @@ namespace RequestManager.Properties {
                 return ((string)(this["MSSQL_USERS_TABLE"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Requests")]
+        public string MSSQL_REQUESTS {
+            get {
+                return ((string)(this["MSSQL_REQUESTS"]));
+            }
+        }
     }
 }

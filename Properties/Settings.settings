@@ -38,5 +38,8 @@
     <Setting Name="MSSQL_USERS_TABLE" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Users</Value>
     </Setting>
+    <Setting Name="MSSQL_REQUESTS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Requests</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

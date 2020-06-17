@@ -37,12 +37,12 @@
             this.inDirSelectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.OpenNewRequestsFormButton = new System.Windows.Forms.Button();
+            this.LoadRequestsButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LoadRequestsButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -151,13 +151,29 @@
             // 
             // OpenNewRequestsFormButton
             // 
+            this.OpenNewRequestsFormButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OpenNewRequestsFormButton.Location = new System.Drawing.Point(3, 3);
             this.OpenNewRequestsFormButton.Name = "OpenNewRequestsFormButton";
-            this.OpenNewRequestsFormButton.Size = new System.Drawing.Size(180, 36);
+            this.OpenNewRequestsFormButton.Size = new System.Drawing.Size(180, 38);
             this.OpenNewRequestsFormButton.TabIndex = 0;
             this.OpenNewRequestsFormButton.Text = "Получить данные о готовых заявках";
             this.OpenNewRequestsFormButton.UseVisualStyleBackColor = true;
             this.OpenNewRequestsFormButton.Click += new System.EventHandler(this.OpenNewRequestsFormButton_Click);
+            // 
+            // LoadRequestsButton
+            // 
+            this.LoadRequestsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadRequestsButton.Location = new System.Drawing.Point(189, 3);
+            this.LoadRequestsButton.Name = "LoadRequestsButton";
+            this.LoadRequestsButton.Size = new System.Drawing.Size(190, 38);
+            this.LoadRequestsButton.TabIndex = 1;
+            this.LoadRequestsButton.Text = "Загрузить запросы в БД";
+            this.LoadRequestsButton.UseVisualStyleBackColor = true;
+            this.LoadRequestsButton.Click += new System.EventHandler(this.LoadRequestsButton_Click);
             // 
             // menuStrip1
             // 
@@ -199,17 +215,6 @@
             this.UserManamentToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
             this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
             this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
-            // 
-            // LoadRequestsButton
-            // 
-            this.LoadRequestsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LoadRequestsButton.Location = new System.Drawing.Point(189, 3);
-            this.LoadRequestsButton.Name = "LoadRequestsButton";
-            this.LoadRequestsButton.Size = new System.Drawing.Size(190, 38);
-            this.LoadRequestsButton.TabIndex = 1;
-            this.LoadRequestsButton.Text = "Загрузить запросы в БД";
-            this.LoadRequestsButton.UseVisualStyleBackColor = true;
-            this.LoadRequestsButton.Click += new System.EventHandler(this.LoadRequestsButton_Click);
             // 
             // MainForm
             // 
