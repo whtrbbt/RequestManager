@@ -19,7 +19,9 @@ namespace RequestManager
         {
             LoadUserListFromDB();
             InitializeComponent();
-            
+            //SelectRequestsUserComboBox.Font.Italic = true;
+
+
         }
 
         private void SelectRequestsUserComboBox_Enter(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace RequestManager
 
             usersTable = CSVUtility.CSVUtility.GetDataTableFromDB(stringBuilder.ConnectionString, query);
 
-            userList.Add("");
+            userList.Add("*Все*");
             foreach (DataRow dr in usersTable.Rows)
             {
                 userList.Add(dr[1].ToString());

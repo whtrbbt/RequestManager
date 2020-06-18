@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSVUtility;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace RequestManager
 {
@@ -105,7 +106,9 @@ namespace RequestManager
                 client.Authenticate(login, passw);
            }
            catch (Exception e)
-           { }   
+           {
+                MessageBox.Show(e.Message, "ОШИБКА!");
+           }   
            return client;            
            
 
@@ -123,6 +126,7 @@ namespace RequestManager
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.Message, "Внимание!");
                 numberOfMessages = -1;
             }
             return numberOfMessages;
@@ -214,7 +218,7 @@ namespace RequestManager
             {
                 //limiter--;
                 //if (limiter <= 0) break;
-                
+
                 link = "";
                 code = "";
                 reqNum = "";
@@ -239,14 +243,49 @@ namespace RequestManager
             return requestResult;
         }
 
-        private void LoadResponsesToDB (DataTable inResponses)
+        private int DeleteLoadedResponsesFromMailbox (DataTable responses)
+        {
+            List<UniqueId> toDelete = new List<UniqueId>();
+            UniqueId id; 
+            var haveSeen = from row in responses.AsEnumerable()
+                           where row.Field<bool>("HaveSeen") == true
+                           select row;
+            int numberOfMessages;
+            
+            foreach (DataRow hs in haveSeen)
+            {
+                id = new UniqueId(System.Convert.ToUInt32(hs["UID"]));
+                toDelete.Add(id);               
+            }
+            numberOfMessages = toDelete.Count;
+            
+            try
+            {
+                workFolder.Open(FolderAccess.ReadWrite);
+                foreach (UniqueId m in toDelete)
+                {
+                    workFolder.AddFlags(m, MessageFlags.Deleted, true);
+                }
+                //workFolder.Expunge();
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Внимание!");
+                numberOfMessages = -1;
+            }
+            return numberOfMessages;
+        }
+        
+        private bool LoadResponsesToDB (DataTable inResponses)
         {
             DataTable responsesToDB = new DataTable();
             DataColumn column;
             DataRow dataRow;
+            bool success;
 
             #region Задаем структуру таблицы responsesToDB
-            
+
             //1. RequestNum (Номер запросов)
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
@@ -303,31 +342,33 @@ namespace RequestManager
             {
                 MessageBox.Show(e.Message, "ОШИБКА!");
             }
-            finally
+            
+            try
+            {
+                SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder();
+                stringBuilder.DataSource = Properties.Settings.Default.MSSQL_SERVER;
+                stringBuilder.InitialCatalog = Properties.Settings.Default.MSSQL_DBNAME;
+                stringBuilder.UserID = Properties.Settings.Default.MSSQL_UID;
+                stringBuilder.Password = Properties.Settings.Default.MSSQL_PASSWORD;
+                stringBuilder.IntegratedSecurity = true;
+
+                CSVUtility.CSVUtility.InsertDataIntoSQLServerUsingSQLBulkCopy(responsesToDB, Properties.Settings.Default.MSSQL_RESPONSE_TABLE, stringBuilder.ConnectionString);
+                success = true;
+            }
+
+            catch (Exception e)
             {
 
-                try
-                {
-                    SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder();
-                    stringBuilder.DataSource = Properties.Settings.Default.MSSQL_SERVER;
-                    stringBuilder.InitialCatalog = Properties.Settings.Default.MSSQL_DBNAME;
-                    stringBuilder.UserID = Properties.Settings.Default.MSSQL_UID;
-                    stringBuilder.Password = Properties.Settings.Default.MSSQL_PASSWORD;
-                    stringBuilder.IntegratedSecurity = true;
-
-                    CSVUtility.CSVUtility.InsertDataIntoSQLServerUsingSQLBulkCopy(responsesToDB, Properties.Settings.Default.MSSQL_RESPONSE_TABLE, stringBuilder.ConnectionString);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Не удалось загрузить данные в базу данных: "+e.Message, "ОШИБКА!");                    
-                }
-                finally
-                {
-                    MessageBox.Show("Загрузка данных завершена, загружено: " + responsesToDB.Rows.Count + " записей.", "Готово!");
-                }
+                MessageBox.Show("Не удалось загрузить данные в базу данных: " + e.Message, "ОШИБКА!");
+                success = false;
             }
-           
-          
+            if (success)
+                MessageBox.Show("Загрузка данных завершена, загружено: " + responsesToDB.Rows.Count + " записей.", "Готово!");
+            else return success;
+
+
+            return success;
+
         }
 
         private async void DownloadRequestsDataButton_Click(object sender, EventArgs e)
@@ -344,18 +385,22 @@ namespace RequestManager
                 await Task.Run(() => 
                 { 
                     response = RequestsDataParser(workFolder, searchQuery);
-                    LoadResponsesToDB(response);
+                    if (LoadResponsesToDB(response))
+                        DeleteLoadedResponsesFromMailbox(response);
+                    else
+                        return;
                     //CSVUtility.CSVUtility.ToCSV(response, Properties.Settings.Default.REQ_OUT_DIR + "\\out.csv");                
                 } );
             }
-            catch (Exception)
-            { 
-                throw;
-            }
-            finally
+            catch (Exception ex)
             {
-                MessageBox.Show("Загруженно "+ response.Rows.Count + " готовых заявок!", "Готово!");
+                //MessageBox.Show("Не удалось загрузить данные в базу данных: " + ex.Message, "ОШИБКА!");
+                //throw;
             }
+            //finally
+            //{
+            //    MessageBox.Show("Загруженно "+ response.Rows.Count + " готовых заявок!", "Готово!");
+            //}
 
             this.requestsResponse = response;
             DownloadRequestsDataButton.Enabled = true;
