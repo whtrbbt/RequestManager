@@ -1,12 +1,5 @@
-﻿using System;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Windows.Forms;
 
 namespace RequestManager
@@ -105,6 +98,15 @@ namespace RequestManager
         {
             GetFinishedRequestsForm getFinishedRequests = new GetFinishedRequestsForm();
             getFinishedRequests.ShowDialog();
+        }
+
+        private void RunBatchModeButton_Click(object sender, EventArgs e)
+        {
+            ProcessReqFileFromInDirForm processReqFileFromInDir = new ProcessReqFileFromInDirForm();
+            processReqFileFromInDir.Show();
+            processReqFileFromInDir.CheckRequestFromDir(Properties.Settings.Default.REQ_IN_DIR, Properties.Settings.Default.REQ_OUT_DIR);
+            MessageBox.Show("Готово!");
+            processReqFileFromInDir.Close();
         }
     }
 }

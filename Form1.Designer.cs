@@ -38,12 +38,13 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.OpenNewRequestsFormButton = new System.Windows.Forms.Button();
             this.LoadRequestsButton = new System.Windows.Forms.Button();
+            this.GetFinishedRequestsButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GetFinishedRequestsButton = new System.Windows.Forms.Button();
+            this.RunBatchModeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -142,6 +143,7 @@
             this.tableLayoutPanel2.Controls.Add(this.OpenNewRequestsFormButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.LoadRequestsButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.GetFinishedRequestsButton, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.RunBatchModeButton, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 121);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -176,6 +178,16 @@
             this.LoadRequestsButton.Text = "Загрузить запросы в БД";
             this.LoadRequestsButton.UseVisualStyleBackColor = true;
             this.LoadRequestsButton.Click += new System.EventHandler(this.LoadRequestsButton_Click);
+            // 
+            // GetFinishedRequestsButton
+            // 
+            this.GetFinishedRequestsButton.Location = new System.Drawing.Point(189, 47);
+            this.GetFinishedRequestsButton.Name = "GetFinishedRequestsButton";
+            this.GetFinishedRequestsButton.Size = new System.Drawing.Size(190, 37);
+            this.GetFinishedRequestsButton.TabIndex = 2;
+            this.GetFinishedRequestsButton.Text = "Выгрузить готовые запросы";
+            this.GetFinishedRequestsButton.UseVisualStyleBackColor = true;
+            this.GetFinishedRequestsButton.Click += new System.EventHandler(this.GetFinishedRequestsButton_Click);
             // 
             // menuStrip1
             // 
@@ -218,15 +230,18 @@
             this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
             this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
             // 
-            // GetFinishedRequestsButton
+            // RunBatchModeButton
             // 
-            this.GetFinishedRequestsButton.Location = new System.Drawing.Point(189, 47);
-            this.GetFinishedRequestsButton.Name = "GetFinishedRequestsButton";
-            this.GetFinishedRequestsButton.Size = new System.Drawing.Size(190, 37);
-            this.GetFinishedRequestsButton.TabIndex = 2;
-            this.GetFinishedRequestsButton.Text = "Выгрузить готовые запросы";
-            this.GetFinishedRequestsButton.UseVisualStyleBackColor = true;
-            this.GetFinishedRequestsButton.Click += new System.EventHandler(this.GetFinishedRequestsButton_Click);
+            this.RunBatchModeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RunBatchModeButton.Location = new System.Drawing.Point(3, 47);
+            this.RunBatchModeButton.Name = "RunBatchModeButton";
+            this.RunBatchModeButton.Size = new System.Drawing.Size(180, 37);
+            this.RunBatchModeButton.TabIndex = 3;
+            this.RunBatchModeButton.Text = "Пакетная обработка";
+            this.RunBatchModeButton.UseVisualStyleBackColor = true;
+            this.RunBatchModeButton.Click += new System.EventHandler(this.RunBatchModeButton_Click);
             // 
             // MainForm
             // 
@@ -270,6 +285,7 @@
         private System.Windows.Forms.ToolStripMenuItem UserManamentToolStripMenuItem;
         private System.Windows.Forms.Button LoadRequestsButton;
         private System.Windows.Forms.Button GetFinishedRequestsButton;
+        private System.Windows.Forms.Button RunBatchModeButton;
     }
 }
 

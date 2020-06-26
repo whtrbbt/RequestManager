@@ -22,6 +22,7 @@ namespace RequestManager
         IMailFolder workFolder;
         SearchQuery searchQuery;
         public DataTable requestsResponse;
+        string formHeader;
 
         public NewRequestsForm()
         {
@@ -29,6 +30,7 @@ namespace RequestManager
             searchQuery = SearchQuery.NotSeen.And(SearchQuery.SubjectContains("Портал Росреестра: заявление выполн"));            
 
             InitializeComponent();
+            formHeader = this.Text;
             imapClient = this.CreateIMAPConnection();
             if (imapClient.IsConnected)
             {
@@ -266,7 +268,7 @@ namespace RequestManager
                 {
                     workFolder.AddFlags(m, MessageFlags.Deleted, true);
                 }
-                //workFolder.Expunge();
+                workFolder.Expunge();
                 
             }
             catch (Exception e)
@@ -383,10 +385,15 @@ namespace RequestManager
             try
             {
                 await Task.Run(() => 
-                { 
+                {
+                    //this.Text = "Скачиваю результаты запросов...";
                     response = RequestsDataParser(workFolder, searchQuery);
+                    //this.Text = "Загружаю результаты в БД...";
                     if (LoadResponsesToDB(response))
+                    {
+                        //this.Text = "Удаляю загруженные результаты из почты...";
                         DeleteLoadedResponsesFromMailbox(response);
+                    }
                     else
                         return;
                     //CSVUtility.CSVUtility.ToCSV(response, Properties.Settings.Default.REQ_OUT_DIR + "\\out.csv");                
@@ -403,6 +410,7 @@ namespace RequestManager
             //}
 
             this.requestsResponse = response;
+            this.Text = formHeader;
             DownloadRequestsDataButton.Enabled = true;
 
         }

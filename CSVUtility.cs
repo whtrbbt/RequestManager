@@ -59,6 +59,64 @@ namespace CSVUtility
             sw.Close();
         }
 
+        public static void ToXLSX(DataTable dtDataTable, string strFilePath, bool useHypelink = true)
+        // Схраняет DataTable в файл XLXS
+        {
+            Excel.Application exc = new Microsoft.Office.Interop.Excel.Application();
+            Excel.XlReferenceStyle RefStyle = exc.ReferenceStyle;
+            Excel.Workbook wb = null;
+
+            try
+            {
+                wb = exc.Workbooks.Add();
+            }
+            catch (SystemException ex)
+            {
+                throw ex;
+            }
+
+
+            Excel.Worksheet whs1 = wb.Worksheets.get_Item(1) as Excel.Worksheet;
+
+            //Заполняем заголовок таблицы
+            Excel.Range header;
+            Int32 columnCount;
+            columnCount = dtDataTable.Columns.Count;
+
+            object[,] objHeaderData = new Object[1, columnCount];
+
+            for (int i = 0; i < columnCount; i++)
+            {
+                objHeaderData[0, i] = dtDataTable.Columns[i].ToString();
+            }
+            header = whs1.get_Range("A1", "A1");
+            header = header.get_Resize(1, columnCount);
+            header.Value = objHeaderData;
+
+            int r = 2; //Отступаем одну строку с заголовком
+            int c = 1;
+            string cellValue;
+            foreach (DataRow dr in dtDataTable.Rows)
+            {
+                foreach (DataColumn dc in dtDataTable.Columns)
+                {
+                    cellValue = dr[dc].ToString();
+                    Excel.Range excelcell = whs1.Cells[r, c];
+                    excelcell.NumberFormat = "@";
+                    excelcell.Value2 = cellValue;
+                    if (useHypelink && (cellValue.StartsWith("http")))
+                        whs1.Hyperlinks.Add(excelcell, cellValue, Type.Missing, cellValue);
+                    c++;
+                }
+                c = 1;
+                r++;
+            }
+            whs1.Columns.AutoFit();
+            wb.SaveAs(strFilePath);
+            exc.Quit();
+
+        }
+
         public static void ToXLSX(DataTable dtDataTable, string strFilePath, string tmplFileName, bool useHypelink = true )
         // Схраняет DataTable в файл XLXS
         {
@@ -177,28 +235,35 @@ namespace CSVUtility
             int totalSheet = 0; //No of sheets on excel file  
             using (OleDbConnection objConn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + file_path + ";Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';"))
             {
-                objConn.Open();
-                OleDbCommand cmd = new OleDbCommand();
-                OleDbDataAdapter oleda = new OleDbDataAdapter();
-                DataSet ds = new DataSet();
-                DataTable dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                string sheetName = string.Empty;
-                if (dt != null)
+                try
                 {
-                    var tempDataTable = (from dataRow in dt.AsEnumerable()
-                                         where !dataRow["TABLE_NAME"].ToString().Contains("FilterDatabase")
-                                         select dataRow).CopyToDataTable();
-                    dt = tempDataTable;
-                    totalSheet = dt.Rows.Count;
-                    sheetName = dt.Rows[0]["TABLE_NAME"].ToString();
+                    objConn.Open();
+                    OleDbCommand cmd = new OleDbCommand();
+                    OleDbDataAdapter oleda = new OleDbDataAdapter();
+                    DataSet ds = new DataSet();
+                    DataTable dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                    string sheetName = string.Empty;
+                    if (dt != null)
+                    {
+                        var tempDataTable = (from dataRow in dt.AsEnumerable()
+                                             where !dataRow["TABLE_NAME"].ToString().Contains("FilterDatabase")
+                                             select dataRow).CopyToDataTable();
+                        dt = tempDataTable;
+                        totalSheet = dt.Rows.Count;
+                        sheetName = dt.Rows[0]["TABLE_NAME"].ToString();
+                    }
+                    cmd.Connection = objConn;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM [" + sheetName + "]";
+                    oleda = new OleDbDataAdapter(cmd);
+                    oleda.Fill(ds, "excelData");
+                    dtResult = ds.Tables["excelData"];
+                    objConn.Close();
                 }
-                cmd.Connection = objConn;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM [" + sheetName + "]";
-                oleda = new OleDbDataAdapter(cmd);
-                oleda.Fill(ds, "excelData");
-                dtResult = ds.Tables["excelData"];
-                objConn.Close();
+                catch (Exception e)
+                {
+                    throw (e);
+                }
                 return dtResult; //Returning Dattable  
             }
         }
