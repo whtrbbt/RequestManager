@@ -8,12 +8,13 @@ namespace RequestManager
     {
         string INDir = @Properties.Settings.Default.REQ_IN_DIR;
         string OUTDir = @Properties.Settings.Default.REQ_OUT_DIR;
-
+        bool CLEAROutDir = Properties.Settings.Default.CLEAR_OUT_DIR;
         public MainForm()
         {
             InitializeComponent();
             inDirTextBox.Text = Properties.Settings.Default.REQ_IN_DIR;
             outDirTextBox.Text = Properties.Settings.Default.REQ_OUT_DIR;
+            clearOutDirCheckBox.Checked = CLEAROutDir;
 
             if (!(CheckIMAPSettings()))
             {
@@ -104,9 +105,15 @@ namespace RequestManager
         {
             ProcessReqFileFromInDirForm processReqFileFromInDir = new ProcessReqFileFromInDirForm();
             processReqFileFromInDir.Show();
-            processReqFileFromInDir.CheckRequestFromDir(Properties.Settings.Default.REQ_IN_DIR, Properties.Settings.Default.REQ_OUT_DIR);
+            processReqFileFromInDir.CheckRequestFromDir(Properties.Settings.Default.REQ_IN_DIR, Properties.Settings.Default.REQ_OUT_DIR, clearOutDirCheckBox.Checked);
             MessageBox.Show("Готово!");
             processReqFileFromInDir.Close();
+        }
+
+        private void clearOutDirCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.CLEAR_OUT_DIR = clearOutDirCheckBox.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

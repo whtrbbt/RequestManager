@@ -67,6 +67,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProcessReqFileFromInDirForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Обработка файлов с запросами из папки IN";
             this.Load += new System.EventHandler(this.ProcessReqFileFromInDirForm_Load);
             this.Shown += new System.EventHandler(this.ProcessReqFileFromInDirForm_Shown);

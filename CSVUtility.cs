@@ -63,7 +63,7 @@ namespace CSVUtility
         // Схраняет DataTable в файл XLXS
         {
             Excel.Application exc = new Microsoft.Office.Interop.Excel.Application();
-            Excel.XlReferenceStyle RefStyle = exc.ReferenceStyle;
+            Excel.XlReferenceStyle RefStyle = exc.ReferenceStyle;            
             Excel.Workbook wb = null;
 
             try

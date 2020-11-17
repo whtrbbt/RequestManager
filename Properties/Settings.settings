@@ -41,5 +41,8 @@
     <Setting Name="MSSQL_REQUESTS" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Requests</Value>
     </Setting>
+    <Setting Name="CLEAR_OUT_DIR" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

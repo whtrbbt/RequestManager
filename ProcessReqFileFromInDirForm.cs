@@ -158,13 +158,24 @@ namespace RequestManager
             return result;
         }
 
-        public void CheckRequestFromDir(string inDir, string outDir)
-        // Проверяет папку inDir на наличие подпапок, создает подпапки в папке outDir, запускает проверку файлов запросов в папках
+        public void CheckRequestFromDir(string inDir, string outDir, bool clearOutDir = false)
+        // Проверяет папку inDir на наличие подпапок, очищает папку outDir, создает подпапки в папке outDir, запускает проверку файлов запросов в папках
         {
             var dirIN = new DirectoryInfo(@inDir); //папка с входящими файлами 
             var dirOUT = new DirectoryInfo(@outDir+"\\"); //папка с исходящими файлами  
             string dirName = "";
-
+            if (clearOutDir)
+            {
+                try
+                {
+                    dirOUT.Delete(true);
+                    dirOUT.Create();
+                }
+                catch (SystemException ex)
+                {
+                    throw ex;
+                }
+            }
             foreach (DirectoryInfo dir in dirIN.GetDirectories()) //ищем все подкаталоги в каталоге dirIN
             {
                 dirName = Path.GetFileName(dir.FullName); //получаем имя текущего подкаталога

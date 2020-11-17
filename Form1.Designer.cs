@@ -39,12 +39,13 @@
             this.OpenNewRequestsFormButton = new System.Windows.Forms.Button();
             this.LoadRequestsButton = new System.Windows.Forms.Button();
             this.GetFinishedRequestsButton = new System.Windows.Forms.Button();
+            this.RunBatchModeButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iMAPServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DBServerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserManamentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RunBatchModeButton = new System.Windows.Forms.Button();
+            this.clearOutDirCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -58,20 +59,22 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.inDirTextBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.outDirTextBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.outDirSelectButton, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.outDirTextBox, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.outDirSelectButton, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.inDirSelectButton, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.clearOutDirCheckBox, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 211);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 215);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -89,9 +92,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Location = new System.Drawing.Point(3, 59);
+            this.label2.Location = new System.Drawing.Point(3, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 25);
+            this.label2.Size = new System.Drawing.Size(215, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Папка с проверенными файлами заявок";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -109,7 +112,7 @@
             // outDirTextBox
             // 
             this.outDirTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outDirTextBox.Location = new System.Drawing.Point(3, 87);
+            this.outDirTextBox.Location = new System.Drawing.Point(3, 99);
             this.outDirTextBox.Name = "outDirTextBox";
             this.outDirTextBox.ReadOnly = true;
             this.outDirTextBox.Size = new System.Drawing.Size(382, 20);
@@ -117,9 +120,9 @@
             // 
             // outDirSelectButton
             // 
-            this.outDirSelectButton.Location = new System.Drawing.Point(391, 87);
+            this.outDirSelectButton.Location = new System.Drawing.Point(391, 99);
             this.outDirSelectButton.Name = "outDirSelectButton";
-            this.outDirSelectButton.Size = new System.Drawing.Size(125, 23);
+            this.outDirSelectButton.Size = new System.Drawing.Size(125, 21);
             this.outDirSelectButton.TabIndex = 5;
             this.outDirSelectButton.Text = "Выбрать";
             this.outDirSelectButton.UseVisualStyleBackColor = true;
@@ -145,12 +148,12 @@
             this.tableLayoutPanel2.Controls.Add(this.GetFinishedRequestsButton, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.RunBatchModeButton, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 121);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 126);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(382, 87);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(382, 86);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // OpenNewRequestsFormButton
@@ -183,11 +186,24 @@
             // 
             this.GetFinishedRequestsButton.Location = new System.Drawing.Point(189, 47);
             this.GetFinishedRequestsButton.Name = "GetFinishedRequestsButton";
-            this.GetFinishedRequestsButton.Size = new System.Drawing.Size(190, 37);
+            this.GetFinishedRequestsButton.Size = new System.Drawing.Size(190, 36);
             this.GetFinishedRequestsButton.TabIndex = 2;
             this.GetFinishedRequestsButton.Text = "Выгрузить готовые запросы";
             this.GetFinishedRequestsButton.UseVisualStyleBackColor = true;
             this.GetFinishedRequestsButton.Click += new System.EventHandler(this.GetFinishedRequestsButton_Click);
+            // 
+            // RunBatchModeButton
+            // 
+            this.RunBatchModeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RunBatchModeButton.Location = new System.Drawing.Point(3, 47);
+            this.RunBatchModeButton.Name = "RunBatchModeButton";
+            this.RunBatchModeButton.Size = new System.Drawing.Size(180, 36);
+            this.RunBatchModeButton.TabIndex = 3;
+            this.RunBatchModeButton.Text = "Пакетная обработка";
+            this.RunBatchModeButton.UseVisualStyleBackColor = true;
+            this.RunBatchModeButton.Click += new System.EventHandler(this.RunBatchModeButton_Click);
             // 
             // menuStrip1
             // 
@@ -230,24 +246,23 @@
             this.UserManamentToolStripMenuItem.Text = "Управление пользователями...";
             this.UserManamentToolStripMenuItem.Click += new System.EventHandler(this.UserManamentToolStripMenuItem_Click);
             // 
-            // RunBatchModeButton
+            // clearOutDirCheckBox
             // 
-            this.RunBatchModeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RunBatchModeButton.Location = new System.Drawing.Point(3, 47);
-            this.RunBatchModeButton.Name = "RunBatchModeButton";
-            this.RunBatchModeButton.Size = new System.Drawing.Size(180, 37);
-            this.RunBatchModeButton.TabIndex = 3;
-            this.RunBatchModeButton.Text = "Пакетная обработка";
-            this.RunBatchModeButton.UseVisualStyleBackColor = true;
-            this.RunBatchModeButton.Click += new System.EventHandler(this.RunBatchModeButton_Click);
+            this.clearOutDirCheckBox.AutoSize = true;
+            this.clearOutDirCheckBox.Location = new System.Drawing.Point(3, 78);
+            this.clearOutDirCheckBox.Name = "clearOutDirCheckBox";
+            this.clearOutDirCheckBox.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.clearOutDirCheckBox.Size = new System.Drawing.Size(110, 15);
+            this.clearOutDirCheckBox.TabIndex = 7;
+            this.clearOutDirCheckBox.Text = "Очистить папку";
+            this.clearOutDirCheckBox.UseVisualStyleBackColor = true;
+            this.clearOutDirCheckBox.CheckedChanged += new System.EventHandler(this.clearOutDirCheckBox_CheckedChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 235);
+            this.ClientSize = new System.Drawing.Size(519, 239);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -286,6 +301,7 @@
         private System.Windows.Forms.Button LoadRequestsButton;
         private System.Windows.Forms.Button GetFinishedRequestsButton;
         private System.Windows.Forms.Button RunBatchModeButton;
+        private System.Windows.Forms.CheckBox clearOutDirCheckBox;
     }
 }
 

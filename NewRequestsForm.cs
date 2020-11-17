@@ -411,6 +411,7 @@ namespace RequestManager
 
             this.requestsResponse = response;
             this.Text = formHeader;
+            this.NewRequestsCountLabel.Text = CountMessagesInFolder(workFolder, searchQuery).ToString(); // ВРЕМЕННО! Заменить на вызов конструктора.
             DownloadRequestsDataButton.Enabled = true;
 
         }
